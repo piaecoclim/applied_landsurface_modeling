@@ -22,3 +22,5 @@ to activate the environment:
 ```
 conda activate your-env-name
 ```
+
+[workflow](workflow.jpeg)
