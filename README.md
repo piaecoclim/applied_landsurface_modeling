@@ -8,7 +8,7 @@ Final version of the Simple Waterbalance Model (SWBM) including:
 
 Have a look at the basic structure of the model [here](workflow.jpeg).
 
-All Data has 0.5° spatial resolution and a temporal coverage between 2000 and 2023
+All Data has 0.5° spatial resolution and a temporal coverage between 2000 and 2023. Data can be downloaded under this [link](https://drive.google.com/drive/folders/1V765zRx40aa4dfW-wJSSS-9CB0W1tfSI?usp=sharing)
 
 * LAI data (MOD15A2H.061) is lineary interpolated to daily resolution (origionally 8-daily)
 * Temperature, Net-Radiation & Precipitation are ERA5 reanalysis Data
