@@ -4,7 +4,7 @@ Final version of the Simple Waterbalance Model (SWBM) including:
 
 * Snow implementation
 * Influence of LAI and Temperature on $\beta_0$
-* Running over all grid cells at the same time using xarray functionality
+
 
 Have a look at the basic structure of the model [here](workflow.jpeg).
 
