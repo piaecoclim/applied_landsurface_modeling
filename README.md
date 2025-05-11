@@ -6,6 +6,8 @@ Final version of the Simple Waterbalance Model (SWBM) including:
 * Influence of LAI and Temperature on $\beta_0$
 * Running over all grid cells at the same time using xarray functionality
 
+Have a look at the basic structure of the model [here](workflow.jpeg).
+
 All Data has 0.5° spatial resolution and a temporal coverage between 2000 and 2023
 
 * LAI data (MOD15A2H.061) is lineary interpolated to daily resolution (origionally 8-daily)
@@ -23,4 +25,4 @@ to activate the environment:
 conda activate your-env-name
 ```
 
-[workflow](workflow.jpeg)
+
