@@ -43,7 +43,7 @@ conda activate wbm_env
 
 #### 3. Modify the <code> data_path & output_path </code> within the waterbalancemodel.py file. And then run python waterbalancemodel.py in the python environment.
 
-#### 4. Run the model via
+#### 4. Run the model in the terminal via
 ```
 python waterbalancemodel.py
 ```
