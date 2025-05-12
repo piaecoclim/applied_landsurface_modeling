@@ -25,8 +25,8 @@ All input data has:
 
 ### 🔧 Setup Instructions
 
-#### 1. Install Conda (if not installed):  
-[Download Anaconda](https://www.anaconda.com/)
+#### 1. Install (Mini-)Conda (if not installed):  
+
 
 #### 2. Create the environment from `.yml` file:
 ```bash
