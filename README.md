@@ -48,5 +48,5 @@ python waterbalancemodel.py
 
 
 # Output 
-model_output.nc: Water balance components (runoff, evapotranspiration, soil moisture, snow)
-water_balance_components.png: Time series plot for a selected location (e.g., Freiburg)
+- model_output.nc: Water balance components (runoff, evapotranspiration, soil moisture, snow)
+- water_balance_components.png: Time series plot for a selected location (e.g., Freiburg)
