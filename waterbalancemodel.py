@@ -4,8 +4,8 @@ import os
 import matplotlib.pyplot as plt
 
 global data_path, output_path
-data_path = #add folder which contains data
-output_path = #add path to output folder
+data_path = #add your path here
+output_path =#add your path here
 
 
 def calc_et_weight(temp, lai, w):
@@ -41,22 +41,12 @@ def water_balance(w_t, prec_t, rad_t, snow_t, temp_t, cs, alpha, beta, gamma, c_
     return runoff_t, evapo_t, w_next, snow_t
 
 def runoff(w_t, prec_t, cs, alpha):
-    """
-    Calculate the influence of temperature and leaf area index (LAI) on evapotranspiration (ET).
-    Normalizes input variables and applies given weights.
-    """
     return prec_t * (w_t / cs) ** alpha
 
 def evapotranspiration(w_t, rad_t, cs, beta, gamma):
-    """
-    Computes evapotranspiration using available water, net radiation, and parameters.
-    """
     return beta * (w_t / cs) ** gamma * rad_t
 
 def snow_function(snow_t, prec_t, temp_t, c_m):
-    """
-    Determines how much precipitation is snow or rain and calculates snow melt.
-    """
     # Determine if temperature is above freezing (melting condition)
     is_melting = temp_t > 273.15
     
@@ -83,10 +73,6 @@ def snow_function(snow_t, prec_t, temp_t, c_m):
     return snow_out, water_out
 
 def time_evolution(temp, rad, prec, lai, params):
-    """
-    Runs the water balance model over a time series for a given grid cell,
-    taking vegetation and snow processes into account.
-    """
     runoff_out = np.full_like(temp, np.nan)
     evapo_out = np.full_like(temp, np.nan)
     soil_mois_out = np.full_like(temp, np.nan)
@@ -119,12 +105,12 @@ def time_evolution(temp, rad, prec, lai, params):
         
     return runoff_out, evapo_out, soil_mois_out, snow_out
 
-def load_data(datapath):
+def load_data():
     print('Loading data...')
-    temperature = xr.open_mfdataset(datapath + 'daily_average_temperature/*.nc', combine='by_coords').load()
-    precipitation = xr.open_mfdataset(datapath + 'total_precipitation/*.nc', combine='by_coords').load()
-    radiation = xr.open_mfdataset(datapath + 'net_radiation/*.nc', combine='by_coords').load()
-    lai = xr.open_mfdataset(datapath + 'lai_full/*.nc', combine='by_coords').load()
+    temperature = xr.open_mfdataset(data_path + 'daily_average_temperature/*.nc', combine='by_coords').load()
+    precipitation = xr.open_mfdataset(data_path + 'total_precipitation/*.nc', combine='by_coords').load()
+    radiation = xr.open_mfdataset(data_path + 'net_radiation/*.nc', combine='by_coords').load()
+    lai = xr.open_mfdataset(data_path + 'lai_full/*.nc', combine='by_coords').load()
     global data 
     data = xr.Dataset()
     data['temperature'] = temperature['t2m']
@@ -134,17 +120,12 @@ def load_data(datapath):
 
     #get rid of anythin before 2002 and after 2018
     data = data.sel(time=slice('2000-01-01', '2023-12-31'))
-
-
 def main():
-    """
-    Main workflow to load data, run the model using apply_ufunc, 
-    save results to a NetCDF file, and plot components at a selected location.
-    """
-    params = [420, 8, 0.2, 0.8, 1.5, (0.75, 0.25)]
+
+    params = [420, 8, 0.2, 0.8, 1.5, (0.75, 0.25)]     # cs, alpha, gamma, beta, c_m, et_weight
     
     # Load data
-    load_data(data_path)
+    load_data()
     print('Starting model run...')
     runoff, evapo, soil_mois, snow = xr.apply_ufunc(
     time_evolution,
@@ -176,10 +157,6 @@ def main():
     create_results_plot(results)
     
 def create_results_plot(res):
-    """
-    Generates subplots for runoff, evapotranspiration, soil moisture, and snow at a specific location.
-    Saves the figure as a PNG file.
-    """
     print('Creating results plot...')
     fig, axs = plt.subplots(2, 2, figsize=(12, 8))
     res_freiburg = res.sel(lat=47.999, lon=7.845, method='nearest')
