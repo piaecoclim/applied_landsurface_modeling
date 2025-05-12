@@ -39,4 +39,14 @@ to activate the environment:
 conda activate your-env-name
 ```
 
-Once everything is set up you need to modify the <code> data_path & output_path </code> within the waterbalancemodel.py file. And then run python waterbalancemodel.py in the python environment.
+#### 3. Modify the <code> data_path & output_path </code> within the waterbalancemodel.py file. And then run python waterbalancemodel.py in the python environment.
+
+#### 4. Run the model via
+```
+python waterbalancemodel.py
+```
+
+
+# Output 
+model_output.nc: Water balance components (runoff, evapotranspiration, soil moisture, snow)
+water_balance_components.png: Time series plot for a selected location (e.g., Freiburg)
