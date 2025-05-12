@@ -2,6 +2,11 @@ import xarray as xr
 import numpy as np
 import pandas as pd
 import os
+import matplotlib.pyplot as plt
+
+global data_path, output_path
+data_path = #add folder which contains data
+output_path = #add path to output folder
 
 
 def calc_et_weight(temp, lai, w):
@@ -102,10 +107,11 @@ def time_evolution(temp, rad, prec, lai, params):
     return runoff_out, evapo_out, soil_mois_out, snow_out
 
 def load_data(datapath):
-    temperature = xr.open_mfdataset(datapath + 'data/daily_average_temperature/*.nc', combine='by_coords').load()
-    precipitation = xr.open_mfdataset(datapath + 'data/total_precipitation/*.nc', combine='by_coords').load()
-    radiation = xr.open_mfdataset(datapath + 'data/net_radiation/*.nc', combine='by_coords').load()
-    lai = xr.open_mfdataset(datapath + 'data/lai_full/*.nc', combine='by_coords').load()
+    print('Loading data...')
+    temperature = xr.open_mfdataset(datapath + 'daily_average_temperature/*.nc', combine='by_coords').load()
+    precipitation = xr.open_mfdataset(datapath + 'total_precipitation/*.nc', combine='by_coords').load()
+    radiation = xr.open_mfdataset(datapath + 'net_radiation/*.nc', combine='by_coords').load()
+    lai = xr.open_mfdataset(datapath + 'lai_full/*.nc', combine='by_coords').load()
     global data 
     data = xr.Dataset()
     data['temperature'] = temperature['t2m']
@@ -116,12 +122,11 @@ def load_data(datapath):
     #get rid of anythin before 2002 and after 2018
     data = data.sel(time=slice('2000-01-01', '2023-12-31'))
 def main():
-    data_path = '/Users/piamuller/Documents/AppliedLandSurfaceModeling/FinalModelSWBMinclData-main/'
     params = [420, 8, 0.2, 0.8, 1.5, (0.75, 0.25)]
     
     # Load data
     load_data(data_path)
-    
+    print('Starting model run...')
     runoff, evapo, soil_mois, snow = xr.apply_ufunc(
     time_evolution,
     data['temperature'],
@@ -145,11 +150,29 @@ def main():
     #write this into a netcdf file
     #create output folder
 
-    os.makedirs(data_path+'output', exist_ok=True)
+    os.makedirs(output_path, exist_ok=True)
     #save the dataset
-    results.to_netcdf(data_path+'output/model_output.nc')
+    results.to_netcdf(output_path+'model_output.nc')
+    print('Saved model output to' + output_path+'model_output.nc')
+    create_results_plot(results)
     
-    
+def create_results_plot(res):
+    print('Creating results plot...')
+    fig, axs = plt.subplots(2, 2, figsize=(12, 8))
+    res_freiburg = res.sel(lat=47.999, lon=7.845, method='nearest')
+    res_freiburg['runoff'].plot(ax=axs[0, 0], label='Runoff')
+    res_freiburg['evapotranspiration'].plot(ax=axs[0, 1], label='Evapotranspiration')
+    res_freiburg['soil_moisture'].plot(ax=axs[1, 0], label='Soil Moisture')
+    res_freiburg['snow'].plot(ax=axs[1, 1], label='Snow')
+    axs[0, 0].set_title('Runoff')
+    axs[0, 1].set_title('Evapotranspiration')
+    axs[1, 0].set_title('Soil Moisture')
+    axs[1, 1].set_title('Snow')
+    for ax in axs.flat:
+        ax.set_xlabel('Time')
+    plt.suptitle('Water Balance Components at Freiburg')
+    plt.tight_layout()
+    plt.savefig(output_path+'water_balance_components.png')
 
 if __name__ == "__main__":
     main()
