@@ -1,22 +1,35 @@
-# WATER BALANCE MODEL FROM COURSE APPLIED LAND SURFACE MODELING SOSE25
+# 🌍 Simple Water Balance Model (SWBM)
 
+Final version of the model developed during the **Applied Land Surface Modeling** course (SoSe 2025). A general workflow of the model can be found [here](workflow.jpeg).
+---
 
-Final version of the Simple Waterbalance Model (SWBM) including:
+### ✅ Features
+- Snow dynamics based on temperature threshold and melt coefficient
+- Dynamic evapotranspiration coefficient ($\beta_0$) influenced by Leaf Area Index (LAI) and temperature
+- Modular and fully vectorized with `xarray` and `apply_ufunc`
 
-* Snow implementation
-* Influence of LAI and Temperature on $\beta_0$
+---
 
+### 🗂️ Data Overview
 
-Have a look at the basic structure of the model [here](workflow.jpeg).
+All input data has:
+- **Spatial resolution**: 0.5°
+- **Temporal range**: 2000–2023  
+- 📦 Download: [Google Drive Folder](https://drive.google.com/drive/folders/1V765zRx40aa4dfW-wJSSS-9CB0W1tfSI?usp=sharing)
 
-All Data has 0.5° spatial resolution and a temporal coverage between 2000 and 2023. Data can be downloaded under this [link](https://drive.google.com/drive/folders/1V765zRx40aa4dfW-wJSSS-9CB0W1tfSI?usp=sharing).
+**Datasets used:**
+- **LAI**: MOD15A2H.061 (originally 8-daily, linearly interpolated to daily)
+- **ERA5**: Daily average temperature, net radiation, and total precipitation
 
-* LAI data (MOD15A2H.061) is lineary interpolated to daily resolution (origionally 8-daily)
-* Temperature, Net-Radiation & Precipitation are ERA5 reanalysis Data
+---
 
-You can set up a Python environment using the `environment.yml` file in order to automatically install all required packages (and their correct versions) with Conda (you need to install anaconda first, if not already done). In your terminal run
+### 🔧 Setup Instructions
 
-```
+#### 1. Install Conda (if not installed):  
+👉 [Download Anaconda](https://www.anaconda.com/)
+
+#### 2. Create the environment from `.yml` file:
+```bash
 conda env create -f environment.yml
 ```
 
@@ -26,4 +39,4 @@ to activate the environment:
 conda activate your-env-name
 ```
 
-Once everything is set up you need to modify the <code> data_path & output_path </code> within the waterbalance.py file.
+Once everything is set up you need to modify the <code> data_path & output_path </code> within the waterbalancemodel.py file. And then run python waterbalancemodel.py in the python environment.
