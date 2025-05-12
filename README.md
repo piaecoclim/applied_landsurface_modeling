@@ -36,7 +36,7 @@ conda env create -f environment.yml
 to activate the environment:
 
 ```
-conda activate your-env-name
+conda activate wbm_env
 ```
 
 #### 3. Modify the <code> data_path & output_path </code> within the waterbalancemodel.py file. And then run python waterbalancemodel.py in the python environment.
