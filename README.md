@@ -25,4 +25,4 @@ to activate the environment:
 conda activate your-env-name
 ```
 
-
+Once everything is set up you need to modify the <code> data_path & output_path </code> within the waterbalance.py file.
