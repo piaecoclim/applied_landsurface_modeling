@@ -25,6 +25,8 @@ All input data has:
 
 ### 🔧 Setup Instructions
 
+The following steps provide an easy and user-friendly way to install the required dependencies for the model. While you can manually install missing packages using pip or conda (primarily numpy, xarray, and matplotlib), using a dedicated Conda environment is generally a more reliable approach. It helps avoid version conflicts and package clashes, especially when working across multiple projects.
+
 #### 1. Install (Mini-)Conda (if not installed):  
 
 
