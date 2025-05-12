@@ -52,3 +52,15 @@ python waterbalancemodel.py
 # Output 
 - model_output.nc: Water balance components (runoff, evapotranspiration, soil moisture, snow)
 - water_balance_components.png: Time series plot for a selected location (e.g., Freiburg)
+
+
+### Alternative Version for setting up the environment
+```
+conda create --name wbm_env
+
+conda activate wbm_env
+
+conda install -c conda-forge numpy xarray matplotlib netcdf4 h5netcdf
+
+```
+
