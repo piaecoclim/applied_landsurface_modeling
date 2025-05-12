@@ -42,12 +42,22 @@ def water_balance(w_t, prec_t, rad_t, snow_t, temp_t, cs, alpha, beta, gamma, c_
     return runoff_t, evapo_t, w_next, snow_t
 
 def runoff(w_t, prec_t, cs, alpha):
+    """
+    Calculate the influence of temperature and leaf area index (LAI) on evapotranspiration (ET).
+    Normalizes input variables and applies given weights.
+    """
     return prec_t * (w_t / cs) ** alpha
 
 def evapotranspiration(w_t, rad_t, cs, beta, gamma):
+    """
+    Computes evapotranspiration using available water, net radiation, and parameters.
+    """
     return beta * (w_t / cs) ** gamma * rad_t
 
 def snow_function(snow_t, prec_t, temp_t, c_m):
+    """
+    Determines how much precipitation is snow or rain and calculates snow melt.
+    """
     # Determine if temperature is above freezing (melting condition)
     is_melting = temp_t > 273.15
     
@@ -74,6 +84,10 @@ def snow_function(snow_t, prec_t, temp_t, c_m):
     return snow_out, water_out
 
 def time_evolution(temp, rad, prec, lai, params):
+    """
+    Runs the water balance model over a time series for a given grid cell,
+    taking vegetation and snow processes into account.
+    """
     runoff_out = np.full_like(temp, np.nan)
     evapo_out = np.full_like(temp, np.nan)
     soil_mois_out = np.full_like(temp, np.nan)
@@ -121,7 +135,13 @@ def load_data(datapath):
 
     #get rid of anythin before 2002 and after 2018
     data = data.sel(time=slice('2000-01-01', '2023-12-31'))
+
+
 def main():
+    """
+    Main workflow to load data, run the model using apply_ufunc, 
+    save results to a NetCDF file, and plot components at a selected location.
+    """
     params = [420, 8, 0.2, 0.8, 1.5, (0.75, 0.25)]
     
     # Load data
@@ -157,6 +177,10 @@ def main():
     create_results_plot(results)
     
 def create_results_plot(res):
+    """
+    Generates subplots for runoff, evapotranspiration, soil moisture, and snow at a specific location.
+    Saves the figure as a PNG file.
+    """
     print('Creating results plot...')
     fig, axs = plt.subplots(2, 2, figsize=(12, 8))
     res_freiburg = res.sel(lat=47.999, lon=7.845, method='nearest')
