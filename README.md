@@ -60,7 +60,7 @@ conda create --name wbm_env
 
 conda activate wbm_env
 
-conda install -c conda-forge numpy xarray matplotlib netcdf4 h5netcdf
+conda install -c conda-forge numpy xarray matplotlib netcdf4 h5netcdf dask
 
 ```
 
