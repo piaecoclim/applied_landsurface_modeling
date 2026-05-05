@@ -40,6 +40,9 @@ to activate the environment:
 ```
 conda activate wbm_env
 ```
+conda install -c conda-forge ipykernel -y
+python -m ipykernel install --user --name wbm_env --display-name "Python (wmb_env)"
+``` 
 
 #### 3. Modify the <code> data_path & output_path </code> within the waterbalancemodel.py file. And then run python waterbalancemodel.py in the python environment.
 
