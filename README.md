@@ -67,8 +67,12 @@ conda install -c conda-forge numpy xarray matplotlib netcdf4 h5netcdf dask
 ### Global runoff observation-driven dataset
 ```
 https://essd.copernicus.org/articles/11/1655/2019/
+
 ```
 
+### NDVI LAI 500m
+```
+https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD15A2H
+https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD13A1#bands
 
-
-
+```
