@@ -76,3 +76,8 @@ https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD15A2H
 https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD13A1#bands
 
 ```
+
+### Global irrigation gridded dataset
+```
+https://gee-community-catalog.org/projects/global_irrigation/#citation
+```
