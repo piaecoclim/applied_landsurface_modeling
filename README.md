@@ -91,3 +91,8 @@ https://colorcet.holoviz.org/user_guide/Continuous.html
 ```
 https://www.gloh2o.org/koppen/
 ```
+
+### Google earth engine
+```
+https://code.earthengine.google.com/
+```
