@@ -81,3 +81,13 @@ https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD13A1#ba
 ```
 https://gee-community-catalog.org/projects/global_irrigation/#citation
 ```
+
+### Month and nice colorbar
+```
+https://colorcet.holoviz.org/user_guide/Continuous.html
+<img width="237" height="88" alt="Screenshot 2026-05-18 at 12 13 50 PM" src="https://github.com/user-attachments/assets/63e70e1e-19b4-4eec-ac2c-ccb876b4cb48" />
+```
+### Biome
+```
+https://www.gloh2o.org/koppen/
+```
